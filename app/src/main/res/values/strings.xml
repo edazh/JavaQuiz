@@ -1,3 +1,26 @@
 <resources>
     <string name="app_name">JavaQuiz</string>
+    <string name="btn_true">TRUE</string>
+    <string name="btn_false">FALSE</string>
+    <string name="toast_correct">正确!</string>
+    <string name="toast_incorrect">错误!</string>
+    <string name="btn_next">NEXT</string>
+
+    <!--问题列表-->
+    <string name="q1">利用equals()方法判定Date类时，判断的是对象的值而不是对象的地址。</string>
+    <string name="q2">类加载器加载程序运行所需要的所有类，它通过区分本机文件系统的类和网络系统导入的类增加安全性。</string>
+    <string name="q3">== 操作符判定两个分立的对象的内容和类型是否一致。</string>
+    <string name="q4">类加载器加载程序运行所需要的所有类，由网络系统导入的指定类总是先被加载。 </string>
+    <string name="q5"> equals()方法只有在两个对象的内容一致时返回true。</string>
+    <string name="q6">调用System.gc()方法不能保证JVM立即进行垃圾收集，而只能是建议。</string>
+    <string name="q7"> friendly关键字是Java语言的访问控制修饰符。</string>
+    <string name="q8">maxElements是一个成员变量，声明为：“public static final int maxElements=100;”。 </string>
+    <string name="q9"> 实例变量在使用new Xxxx()创建该类的实例时被创建，而其生存期和该类的实例对象的生存期相同。 </string>
+    <string name="q10"> 在构造方法中如调用super()语句，则必须使其成为构造方法中的第一条语句。</string>
+
+
+    <string name="txt_warning">你确定要这么做吗？</string>
+    <string name="btn_show_answer">显示答案</string>
+    <string name="btn_cheat">作弊！</string>
+    <string name="toast_judgment">作弊是不对的！</string>
 </resources>
