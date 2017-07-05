@@ -19,11 +19,12 @@
         android:id="@+id/txt_answer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="24dp"/>
+        android:padding="24dp"
+        tools:text="Answer"/>
 
     <Button
-        android:text="@string/btn_show_answer"
         android:id="@+id/btn_show_answer"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:text="@string/btn_show_answer"/>
 </LinearLayout>

@@ -1,5 +1,6 @@
 package com.edazh.javaquiz;
 
+import android.content.Intent;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,8 +11,11 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private static final String KEY_INDEX = "index";
+    private static final int REQUEST_CODE_CHEAT = 0;
+
     private Button mBtnTrue;
     private Button mBtnFalse;
+    private Button mBtnCheat;
     private Button mBtnNext;
     private TextView mTxtQuestion;
     private Question[] mQuestionBank = new Question[]{
@@ -27,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
             new Question(R.string.q10, true),
     };
     private int mCurrentIndex = 0;
+    private boolean mIsCheater;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +68,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
+                mIsCheater = false;
                 updateQuestion();
+            }
+        });
+
+        //作弊按钮
+        mBtnCheat = (Button) findViewById(R.id.btn_cheat);
+        mBtnCheat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean answerIsTrue = mQuestionBank[mCurrentIndex].isAnswerTrue();
+                Intent intent = CheatActivity.newIntent(MainActivity.this, answerIsTrue);
+                startActivityForResult(intent, REQUEST_CODE_CHEAT);
             }
         });
     }
@@ -83,8 +100,10 @@ public class MainActivity extends AppCompatActivity {
      */
     private void checkAnswer(boolean userPressedTrue) {
         boolean answerIsTrue = mQuestionBank[mCurrentIndex].isAnswerTrue();
-        int messageResId = 0;
-        if (userPressedTrue == answerIsTrue) {
+        int messageResId;
+        if (mIsCheater) {
+            messageResId = R.string.toast_judgment;
+        } else if (userPressedTrue == answerIsTrue) {
             messageResId = R.string.toast_correct;
         } else {
             messageResId = R.string.toast_incorrect;
@@ -100,5 +119,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt(KEY_INDEX, mCurrentIndex);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode != RESULT_OK || data == null) {
+            return;
+        }
+        if (requestCode == REQUEST_CODE_CHEAT) {
+            mIsCheater = CheatActivity.wasAnswerShown(data);
+        }
     }
 }
